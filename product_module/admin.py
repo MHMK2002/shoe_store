@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from product_module.models import Product, ProductBrand, ProductColor, ProductImage, ProductSize
+from product_module.models import Product, ProductBrand, ProductImage
 
 
 # Register your models here.
@@ -14,18 +14,6 @@ class ProductBrandAdminModel(admin.ModelAdmin):
     pass
 
 
-@admin.register(ProductColor)
-class ProductColorAdminModel(admin.ModelAdmin):
-    pass
-
-
 @admin.register(ProductImage)
 class ProductImageAdminModel(admin.ModelAdmin):
     pass
-
-
-@admin.register(ProductSize)
-class ProductSizeAdminModel(admin.ModelAdmin):
-    pass
-
-

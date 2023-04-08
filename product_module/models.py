@@ -11,28 +11,6 @@ class ProductBrand(models.Model):
         return self.name
 
 
-class ProductColor(models.Model):
-    red = 'red'
-    green = 'green'
-    blue = 'blue'
-    black = 'black'
-    white = 'white'
-
-    COLOR_CHOICES = (
-        (red, 'red'),
-        (green, 'green'),
-        (blue, 'blue'),
-        (black, 'black'),
-        (white, 'white'),
-    )
-
-    name = models.CharField(max_length=100, choices=COLOR_CHOICES, default=red)
-
-
-class ProductSize(models.Model):
-    size = models.PositiveIntegerField(validators=[MinValueValidator(30), MaxValueValidator(50)])
-
-
 class ProductImage(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product_images')

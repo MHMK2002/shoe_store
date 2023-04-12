@@ -1,0 +1,5 @@
+Django==4.2
+DjangoRestFramework==3.14.0
+Django_render_partial==0.4
+Pillow==9.5.0
+

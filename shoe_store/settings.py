@@ -24,7 +24,10 @@ SECRET_KEY = 'django-insecure-@y+2$9b*r!fe-8xwos*+_h8w7#x-g37ag!+jz8jjtg!dw2hp8p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://shoe-store.iran.liara.run/',
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'order_module',
     'product_module',
 
+    'corsheaders',
     'rest_framework',
     'django_render_partial',
     'rest_framework.authtoken',
@@ -53,7 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'shoe_store.urls'
 
@@ -129,6 +137,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = [
+    BASE_DIR / 'static',
+]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import ListAPIView
 
 from account_module.models import User
 from product_module.models import Product
@@ -19,6 +20,9 @@ class ProductView(APIView):
             serializer = ProductSerializer(product, many=False)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+
+class ProductViewURD(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         if not serializer.is_valid():
@@ -92,3 +96,18 @@ class WishListView(APIView):
             return Response(data={
                 'isWishList': False,
             })
+
+
+class ProductListView(ListAPIView):
+    serializer_class = ProductSerializer
+    model = Product
+
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+        brand = self.request.query_params.get('brand', None)
+        if brand is not None:
+            queryset = queryset.filter(brand__icontains=brand)
+        return queryset
